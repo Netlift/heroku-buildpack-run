@@ -52,10 +52,9 @@ if [[ -f "$ENV_DIR/BUILDPACK_RUN" ]]; then
 elif [[ -f ./bin/buildpack-run.sh ]]; then
   RUN=./bin/buildpack-run.sh
 else
-  echo "Error: can't apply buildpack, because neither the BUILDPACK_RUN" | i
+  echo "Warning: can't apply buildpack, because neither the BUILDPACK_RUN" | i
   echo "config variable, nor the file bin/buildpack-run.sh exists." | i
-  echo
-  exit 1
+  exit 0
 fi
 
 # Run each of the colon-delimited files (with optional args) with bash
