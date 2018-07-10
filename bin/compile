@@ -16,8 +16,8 @@
 #     heroku config:set BUILDPACK_RUN="file1.sh one two:file2.sh 'Hello World'"
 #     git push heroku master
 #
-# If BUILDPACK_RUN is not set, the file buildpack-run.sh is assumed:
-#     vim buildpack-run.sh        
+# If BUILDPACK_RUN is not set, the file bin/buildpack-run.sh is assumed:
+#     vim bin/buildpack-run.sh
 #     git push heroku master
 # 
 # The working directory for the executed files is the app root directory.
@@ -46,14 +46,14 @@ export ENV_DIR=$3
 
 cd "$BUILD_DIR"
 
-# Get run specification (either BUILDPACK_RUN var or buildpack-run.sh file)
+# Get run specification (either BUILDPACK_RUN var or bin/buildpack-run.sh file)
 if [[ -f "$ENV_DIR/BUILDPACK_RUN" ]]; then
   RUN=$(cat "$ENV_DIR/BUILDPACK_RUN")
-elif [[ -f ./buildpack-run.sh ]]; then
-  RUN=./buildpack-run.sh
+elif [[ -f ./bin/buildpack-run.sh ]]; then
+  RUN=./bin/buildpack-run.sh
 else
   echo "Error: can't apply buildpack, because neither the BUILDPACK_RUN" | i
-  echo "config variable, nor the file buildpack-run.sh exists." | i
+  echo "config variable, nor the file bin/buildpack-run.sh exists." | i
   echo
   exit 1
 fi
